@@ -23,9 +23,15 @@ The following repository contains:
 - update_statistics.m: function which collects and updates the statistics collected throughout learning. 
 - plot_statistics.m: function which plots the statistics collected throughout learning (weight statistics, weight increment statistics, pulse width, number of weight updates).
 
+For the sake of explanation, files main_RBM_soft.m and simu_mem_RBM_soft.m have been further commented.
+
 We want to highlight some precisions on the functions written:
 
-- init.m: when defining a memristive model, one can partially "memristorize" the model: we can ask init to carry out standard gradient descent on some weights and memristor based gradient descent on other weights. The weights which are "memristorized" are specified in brackets (an example is provided later). For memristors, this function handles four possible imperfections: cycle-to-cycle variability ('var_dyn'), device-to-device variability ('var_space'), granularity ('gran'), and the variability of the maximal conductance ('var_Gmax'). One can arbitrarily select one or several of these imperfections in any order when calling the function. Finally, when defining a memristive model, the programming scheme for each "memristorized" weights has to be specified (i.e. either Cst or RProp). Finally 
+- the main_X.m files are meant for quick testing, prototyping abd debugging along with the plot_statistics function which enables to track all quantities throughout learning. 
+
+- the simu_X.m files are the scripts which generate statistically relevant results like those presented in the paper. 
+
+- init.m: when defining a memristive model, one can partially "memristorize" the model: we can ask init to carry out standard gradient descent on some weights and memristor based gradient descent on other weights. The weights which are "memristorized" are specified in brackets (an example is provided below). For memristors, this function handles four possible imperfections: cycle-to-cycle variability ('var_dyn'), device-to-device variability ('var_space'), granularity ('gran'), and the variability of the maximal conductance ('var_Gmax'). One can arbitrarily select one or several of these imperfections in any order when calling the function. Finally, when defining a memristive model, the programming scheme for each "memristorized" weights has to be specified (i.e. either Cst or RProp). 
 
 Example to memristorize weights 1 only, taking into account cycle-to-cycle variability and 8 bits granularity: 
 [model_mem,momentum_mem,param]=init('model',{'gen','flip'},n_epochs,n_layer,lr,...
@@ -33,4 +39,8 @@ Example to memristorize weights 1 only, taking into account cycle-to-cycle varia
     'var_dyn',0.01,'gran',8,...
     [1],[dt_max/1000],{'Cst'});
     
+- gradient_RBM_soft.m: one has to specify a 'type' that is either 'normal' or 'bin', respectively corresponding to taking real values or binary values for neurons respectively when computing the gradient. 
+
+- gradient_DRBM2.m: one has to specify a 'type1' which is either 'normal' or 'bin' for the computation of the gradient as in gradient_RBM_soft.m. The argument 'n_iter_train' (following 'type1') is the number of parallel Gibbs chains which are used to compute the gradient (i.e. what is called #CD in the draft). The argument 'type2' correspond to the type of inference that is used as test time to compute error rates. If 'type2' is set to 'det', then the free-energy deterministic technique is used to compute error rates. If 'type2' is set to 'sto', then the stochastic sampling technique is used to compute error rates and the number of parallel Gibbs chains which are used at test time has to be specified in the varargin.  
+
 
