@@ -20,5 +20,17 @@ The following repository contains:
 - update_weight.m: function which updates weights. 
 - grad_mem_p.m: function which implements conductance potentiation.
 - grad_mem_m.m: function which implements conductance depression. 
-- update_statistics: function which collects and updates the statistics collected throughout learning. 
+- update_statistics.m: function which collects and updates the statistics collected throughout learning. 
+- plot_statistics.m: function which plots the statistics collected throughout learning (weight statistics, weight increment statistics, pulse width, number of weight updates).
+
+We want to highlight some precisions on the functions written:
+
+- init.m: when defining a memristive model, one can partially "memristorize" the model: we can ask init to carry out standard gradient descent on some weights and memristor based gradient descent on other weights. The weights which are "memristorized" are specified in brackets (an example is provided later). For memristors, this function handles four possible imperfections: cycle-to-cycle variability ('var_dyn'), device-to-device variability ('var_space'), granularity ('gran'), and the variability of the maximal conductance ('var_Gmax'). One can arbitrarily select one or several of these imperfections in any order when calling the function. Finally, when defining a memristive model, the programming scheme for each "memristorized" weights has to be specified (i.e. either Cst or RProp). Finally 
+
+Example to memristorize weights 1 only, taking into account cycle-to-cycle variability and 8 bits granularity: 
+[model_mem,momentum_mem,param]=init('model',{'gen','flip'},n_epochs,n_layer,lr,...
+    G_max,G_ratio,beta,dt_max,dt_min,...
+    'var_dyn',0.01,'gran',8,...
+    [1],[dt_max/1000],{'Cst'});
+    
 
