@@ -1,2 +1,2 @@
-# mem-RBM
-test
+# Robust Local Learning with Memristor-Based Restricted Boltzmann Machines
+
