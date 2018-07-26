@@ -17,6 +17,7 @@ The following repository contains:
 - gradient_RBM_soft.m: function which computes the gradient of a RBM topped by a softmax classifier. 
 - gradient_DRBM.m: function which computes the gradient of a Discriminative RBM.
 - gradient_RBM.m: function which computes the gradient of a RBM. 
+- feed_next_RBM.m: function which passes features extracted from a RBM into the next RBM (when training a Deep Belief Net). 
 - update_weight.m: function which updates weights. 
 - grad_mem_p.m: function which implements conductance potentiation.
 - grad_mem_m.m: function which implements conductance depression. 
@@ -39,8 +40,14 @@ Example to memristorize weights 1 only, taking into account cycle-to-cycle varia
     'var_dyn',0.01,'gran',8,...
     [1],[dt_max/1000],{'Cst'});
     
-- gradient_RBM_soft.m: one has to specify a 'type' that is either 'normal' or 'bin', respectively corresponding to taking real values or binary values for neurons respectively when computing the gradient. 
+- gradient_RBM_soft.m and gradient_RBM.m: one has to specify a 'type' that is either 'normal' or 'bin', respectively corresponding to taking real values or binary values for neurons respectively when computing the gradient. 
 
-- gradient_DRBM2.m: one has to specify a 'type1' which is either 'normal' or 'bin' for the computation of the gradient as in gradient_RBM_soft.m. The argument 'n_iter_train' (following 'type1') is the number of parallel Gibbs chains which are used to compute the gradient (i.e. what is called #CD in the draft). The argument 'type2' correspond to the type of inference that is used as test time to compute error rates. If 'type2' is set to 'det', then the free-energy deterministic technique is used to compute error rates. If 'type2' is set to 'sto', then the stochastic sampling technique is used to compute error rates and the number of parallel Gibbs chains which are used at test time has to be specified in the varargin.  
+- gradient_DRBM2.m: one has to specify a 'type1' which is either 'normal' or 'bin' for the computation of the gradient as in gradient_RBM_soft.m. The argument 'n_iter_train' (following 'type1') is the number of parallel Gibbs chains which are used to compute the gradient (i.e. what is called #CD in the draft). The argument 'type2' correspond to the type of inference that is used as test time to compute error rates. If 'type2' is set to 'det', then the free-energy deterministic technique is used to compute error rates. If 'type2' is set to 'sto', then the stochastic sampling technique is used to compute error rates and the number of parallel Gibbs chains which are used at test time has to be specified in the varargin.
+
+- feed_next_RBM.m: passes features from one RBM to another one. The features can either be real-valued ('normal') or binarized ('bin'). 
+
+- grad_mem_p.m and grad_mem_m.m: these files fully specify the conductance update model used. 
+
+- weight_update.m: the schemes 'Cst' and 'RProp' are defined in this function. 
 
 
