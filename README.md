@@ -1,7 +1,7 @@
 # Robust Local Learning with Memristor-Based Restricted Boltzmann Machines
 
 
-This repository contains the code producing the results of [the paper](https://www.nature.com/articles/s41598-018-38181-3) "Using Memristors for Robust Local Learning of Hardware Restricted Boltzmann Machines". The code is written in Matlab (2016).
+This repository contains the code producing the results of [the paper](https://www.nature.com/articles/s41598-018-38181-3) "Using Memristors for Robust Local Learning of Hardware Restricted Boltzmann Machines", published in Scientific Reports. The code is written in Matlab (2016).
 
 ![GitHub Logo](/fig4_ab.png)<!-- .element height="20%" width="20%" -->
 
